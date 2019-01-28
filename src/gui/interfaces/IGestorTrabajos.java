@@ -5,7 +5,7 @@
  */
 package gui.interfaces;
 
-import gui.areas.modelos.Area;
+import gui.areas.modelos.Areas;
 import gui.personas.modelos.Alumno;
 import gui.personas.modelos.Profesor;
 import gui.trabajos.modelos.AlumnoEnTrabajo;
@@ -66,7 +66,7 @@ public interface IGestorTrabajos {
      * @param aet alumnos que realizan el trabajo
      * @return String  - cadena con el resultado de la operación (ERROR_TITULO_DURACION | ERROR_AREAS | ERROR_FECHAS | ERROR_TUTOR_COTUTOR | ERROR_JURADO | ERROR_ALUMNOS | ESCRITURA_ERROR | EXITO)
     */                                                                    
-    public String nuevoTrabajo(String titulo, int duracion, LocalDate fechaPresentacion, LocalDate fechaAprobacion, List<Area> areas, List<RolEnTrabajo> profesores, List<AlumnoEnTrabajo> aet);
+    public String nuevoTrabajo(String titulo, int duracion, LocalDate fechaPresentacion, LocalDate fechaAprobacion, List<Areas> areas, List<RolEnTrabajo> profesores, List<AlumnoEnTrabajo> aet);
     
     /**
      * Finaliza un trabajo asignándole su fecha de exposición, con lo cual termina el trabajo
@@ -110,7 +110,7 @@ public interface IGestorTrabajos {
      * @param area área a buscar
      * @return boolean  - true si hay al menos un trabajo con el área especificada
      */
-    public boolean hayTrabajosConEsteArea(Area area);
+    public boolean hayTrabajosConEsteArea(Areas area);
     
     /**
      * Busca si hay al menos un trabajo con el profesor especificado

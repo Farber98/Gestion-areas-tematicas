@@ -5,23 +5,25 @@
  */
 package gui.interfaces;
 
-import gui.areas.modelos.Area;
+import gui.areas.modelos.Areas;
 import java.util.List;
 
 public interface IGestorAreas {
     //Constantes para las operaciones de E/S
-    public static final String LECTURA_ERROR = "Error al leer las áreas";
-    public static final String LECTURA_OK = "Se pudieron leer las áreas";
-    public static final String ARCHIVO_INEXISTENTE = "No existe el archivo";
-    public static final String ESCRITURA_ERROR = "Error al guardar las áreas";
-    public static final String ESCRITURA_OK = "Se pudieron guardar las áreas";    
+    public static final String LECTURA_ERROR = "Error: No se leyeron las areas.";
+    public static final String LECTURA_OK = "Se leyeron las areas";
+    public static final String ARCHIVO_INEXISTENTE = "Error: No existe el archivo";
+    public static final String ESCRITURA_ERROR = "Error: No se guardaron las areas.";
+    public static final String ESCRITURA_OK = "Se guardaron las áreas";    
 
     //Constantes para el ABM de áreas    
-    public static final String EXITO = "Area creada/borrada con éxito";
-    public static final String ERROR = "El nombre del área no puede ser nulo";
-    public static final String DUPLICADOS = "Ya existe un área con ese nombre";
-    public static final String AREA_CON_TRABAJO = "No se puede borrar el área porque hay trabajo(s) con la misma";    
-
+    public static final String ERROR_NUEVA_AREA_VACIA = "Error: El nombre no puede estar vacio.";
+    public static final String ERROR_NUEVA_AREA_DUPLICADA = "Error: Ya existe un área con ese nombre.";
+    public static final String EXITO_NUEVA_AREA = "Area creada con éxito.";
+    public static final String ERROR_BORRAR_AREA = "Error: El área no se pudo borrar.";
+    public static final String ERROR_BORRAR_AREA_EN_USO = "Error: El área esta en uso.";
+    public static final String ERROR_BORRAR_AREA_INEXISTENTE = "Error: El área no existe";
+    public static final String EXITO_BORRAR_AREA = "Area borrada con éxito.";
     
     /**
      * Crea un nueva área
@@ -35,7 +37,7 @@ public interface IGestorAreas {
      * @param area área a borrar
      * @return String  - cadena con el resultado de la operación
      */
-    public String borrarArea(Area area);
+    public String borrarArea(Areas area);
     
     /**
      * Busca si existe un área con el nombre especificado (total o parcialmente)
@@ -44,7 +46,7 @@ public interface IGestorAreas {
      * @param nombre nombre del área a buscar
      * @return List<Area>  - lista de áreas, ordenadas por nombre, cuyos nombres coincidan con el especificado
     */                                                                           
-    public List<Area> buscarAreas(String nombre);
+    public List<Areas> buscarAreas(String nombre);
     
     /**
      * Busca si existe un área que coincida con el nombre especificado
@@ -54,7 +56,7 @@ public interface IGestorAreas {
      * @param nombre nombre del área a buscar
      * @return Area  - objeto Area cuyo nombre coincida con el nombre especificado, o null
      */
-    public Area dameArea(String nombre);
+    public Areas dameArea(String nombre);
     
     /**
      * Devuelve la posición de la última área agregada
@@ -78,5 +80,23 @@ public interface IGestorAreas {
      * @param area área al cual se le determina el orden
      * @return int  - orden que ocupa el área
      */
-    public int ordenArea(Area area);    
+    public int ordenArea(Areas area);    
+    
+    /**
+     * Guarda las areas en un archivo de texto.
+     * @return String - Mensaje correspondiente (ERROR || EXITO)
+     */
+    
+    /**
+     * Muestra las areas contenidas en nuestra lista.
+     */
+    public void mostrarAreas();
+    
+    public String escribirAreas();
+    
+    /**
+     * Lee las areas del archivo de texto escrito anteriormente.
+     * @return String - Mensaje correspondiente (ERROR || EXITO)
+     */
+    public String leerAreas();
 }
