@@ -45,8 +45,8 @@ import java.util.List;
     {
         Areas UnArea;
         
-        if (nombre.isEmpty()){
-            return ERROR_NUEVA_AREA_VACIA;
+        if (nombre.isEmpty() || nombre == null){
+            return ERROR_NUEVA_AREA_VACIA; 
         }
         
         UnArea = new Areas(nombre);
@@ -103,7 +103,7 @@ import java.util.List;
     {
         List<Areas> areasBuscadas = new ArrayList<>();
         
-        if( nombre == null )        // Esta es la unica cond? nombre.IsEmpty()? nombre = ""?
+        if( nombre == null || nombre.isEmpty() )       
         {
             Collections.sort(listaAreas);       //Ordeno alfabeticamente y devuelto todo.
             return listaAreas;                      
@@ -111,11 +111,11 @@ import java.util.List;
         
         for( Areas area : listaAreas)
         {
-            if( area.getNombre().toUpperCase().contains(nombre.toUpperCase()))      //Comparo si coinciden los nombres en mayusculas. 
+            if( area.getNombre().toUpperCase().startsWith(nombre.toUpperCase()))      //Comparo si coinciden los nombres en mayusculas. 
             { 
                 areasBuscadas.add(area);        //Si coinciden, agrego esa area a la lista a retornar.
                 
-                                                //COINCIDENCIA TOTAL... VER COMO HACER COINCIDENCIA PARCIAl.
+                                                //PROBAR LO DE PARCIAL STARTSWITH
             }
         }
         
@@ -144,8 +144,8 @@ import java.util.List;
     }
     
     public int verUltimaArea()
-     {
-         int posicionUltimaArea = listaAreas.size();        // ¿Si cuando se agrega un area se cancela la operacion devuelve -1?
+     {       
+         int posicionUltimaArea = listaAreas.size();    // ¿Si cuando se agrega un area se cancela la operacion devuelve -1?
          return posicionUltimaArea;                     //¿Como hago para que se actualize? ¿Archivos?
      }
 
