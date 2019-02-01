@@ -81,17 +81,16 @@ public interface IGestorAreas {
      * @return int  - orden que ocupa el área
      */
     public int ordenArea(Areas area);    
-    
-    /**
-     * Guarda las areas en un archivo de texto.
-     * @return String - Mensaje correspondiente (ERROR || EXITO)
-     */
-    
+        
     /**
      * Muestra las areas contenidas en nuestra lista.
      */
     public void mostrarAreas();
     
+    /**
+     * Guarda las areas en un archivo de texto.
+     * @return String - Mensaje correspondiente (ERROR || EXITO)
+     */
     public String escribirAreas();
     
     /**

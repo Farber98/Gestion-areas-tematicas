@@ -183,6 +183,24 @@ import java.util.List;
         }
     }
     
+    /**
+     * Metodo usado en el metodo getValueAt al modelar la tabla. 
+     * @param posicion
+     * @return La posicion indicada en nuestra tabla.
+     */
+    public Areas obtenerArea(int posicion)
+    {
+        return this.listaAreas.get(posicion);
+    }
+    
+    /**
+     * Metodo usado en el metodo getRowCount al modelar la tabla. 
+     * @return  El numero de filas de nuestra tabla 
+     */
+    public int cantidadAreas()
+    {
+        return this.listaAreas.size();
+    }
     
     
     public String escribirAreas()
