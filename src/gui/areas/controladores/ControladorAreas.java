@@ -5,13 +5,15 @@
  */
 package gui.areas.controladores;
 
+import gui.areas.modelos.ModeloTablaAreas;
 import gui.areas.vistas.VentanaAreas;
-import gui.areas.vistas.VistaAreas;
+import gui.interfaces.IControladorAMArea;
 import gui.interfaces.IControladorAreas;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowEvent;
 import javax.swing.JFrame;
+import javax.swing.JTable;
 
 /**
  *
@@ -34,37 +36,53 @@ public class ControladorAreas implements IControladorAreas
     @Override
     public void btnBorrarClic(ActionEvent evt) 
     {
-        
+        //Como implementar metodo
     }
 
     @Override
     public void btnBuscarClic(ActionEvent evt)
     {
-      
+        //Como implementar metodo
     }
 
     @Override
     public void btnNuevaClic(ActionEvent evt) 
     {
-    
+        IControladorAMArea controlador = new ControladorAMArea(this.vista); //Cuando se presione crear, se abrira la VentanaCrearArea.
+        //Solo esto?
     }
 
     @Override
     public void btnVolverClic(ActionEvent evt) 
     {
         this.vista.dispose();
+        //Solo esto?
     } 
 
     @Override
     public void ventanaGanaFoco(WindowEvent evt) 
     {
-        
+        //Como implementar metodo
     }
 
     @Override
     public void txtNombrePresionarTecla(KeyEvent evt) 
     {
-        
+        if(evt.getKeyChar() == KeyEvent.VK_ENTER)   //Cuando se presione se busca.
+            this.buscar();
+    }
+    
+    private void buscar()
+    {
+        String nombreArea;
+        //Como implementar metodo
+    }
+    
+    private void configurarTabla(JTable tablaAreas)
+    {
+//        ModeloTablaAreas modeloTabla = new ModeloTablaAreas(); //Que va en el parentesis?
+//        tablaAreas.setModel(modeloTabla);
+        //Chequear implementacion
     }
     
     
