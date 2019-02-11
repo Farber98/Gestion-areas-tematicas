@@ -6,7 +6,6 @@
 package gui.areas.modelos;
 
 import gui.interfaces.IGestorAreas;
-import java.awt.geom.Area;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -24,10 +23,12 @@ import java.util.List;
     public class GestorAreas implements IGestorAreas {
     private static GestorAreas gestor;
     private List<Areas> listaAreas = new ArrayList<>();
+    private int posicionUltimaArea;
     
-    
-    
-    private GestorAreas(){}; 
+    private GestorAreas()
+    {
+        this.leerAreas();
+    }; 
     
 	
     public static GestorAreas instanciar()
@@ -43,25 +44,35 @@ import java.util.List;
     @Override
     public String nuevaArea(String nombre) 
     {
+        String escritura = this.escribirAreas();
         Areas UnArea;
         
-        if (nombre.isEmpty() || nombre == null){
+        if (nombre.isEmpty() || nombre == null)    //Si el nombre esta vacio o es nulo
+        {
             return ERROR_NUEVA_AREA_VACIA; 
         }
         
         UnArea = new Areas(nombre);
-        if(listaAreas.contains(UnArea)) 
+        if(listaAreas.contains(UnArea))     //Si la lista ya contiene dicha area.
         {
            return ERROR_NUEVA_AREA_DUPLICADA; 
         }
         
-        listaAreas.add(UnArea);
+        listaAreas.add(UnArea);     //Si pasa los controles, el area es agregada.
+        Collections.sort(this.listaAreas); //Ordenamos areas alfabeticamente.
+        if(escritura.equals(ESCRITURA_OK))
+        {
+            //VER AQUI
+            return EXITO_NUEVA_AREA;
+        }
         
-        return EXITO_NUEVA_AREA;
+        return ERROR_NUEVA_AREA;
+        
     }
 
     @Override
     public String borrarArea(Areas area) {
+        String escritura = this.escribirAreas();
         GestorTrabajos miGestorTrabajos = GestorTrabajos.instanciar();
 
         if( area == null)
@@ -69,7 +80,7 @@ import java.util.List;
             return ERROR_BORRAR_AREA;
         }
  
-        if( !listaAreas.contains(area))
+        if( !listaAreas.contains(area))     //No se puede borrar un area que no esta contenida en la lista.
         {    
             return ERROR_BORRAR_AREA_INEXISTENTE;       
         }
@@ -85,13 +96,19 @@ import java.util.List;
         
         for( Areas i : listaAreas)
         {
-            if( i.equals(area))
+            if( i.equals(area))     //Si algun area de la lista es igual al area que se quiere borrar.
             {
                 
-                listaAreas.remove(i);
+                listaAreas.remove(i);       //Borramos esa area
                 i = null;
-                
-                return EXITO_BORRAR_AREA;
+                if(escritura.equals(ESCRITURA_OK))   //Si la escritura se realiza sin errores.
+                {
+                    return EXITO_BORRAR_AREA;
+                }
+                else
+                {
+                    return ESCRITURA_ERROR;
+                }
             }
         }
         
@@ -103,7 +120,7 @@ import java.util.List;
     {
         List<Areas> areasBuscadas = new ArrayList<>();
         
-        if( nombre == null || nombre.isEmpty() )       
+        if( nombre == null || nombre.isEmpty() )   //Si el nombre es igual a nulo o esta vacio       
         {
             Collections.sort(listaAreas);       //Ordeno alfabeticamente y devuelto todo.
             return listaAreas;                      
@@ -111,11 +128,9 @@ import java.util.List;
         
         for( Areas area : listaAreas)
         {
-            if( area.getNombre().toUpperCase().startsWith(nombre.toUpperCase()))      //Comparo si coinciden los nombres en mayusculas. 
+            if( area.getNombre().toUpperCase().startsWith(nombre.toUpperCase()))      //Comparo si coinciden los nombres en mayusculas. Metodo starts with para implementar busqueda parcial. 
             { 
                 areasBuscadas.add(area);        //Si coinciden, agrego esa area a la lista a retornar.
-                
-                                                //PROBAR LO DE PARCIAL STARTSWITH
             }
         }
         
@@ -145,14 +160,14 @@ import java.util.List;
     
     public int verUltimaArea()
      {       
-         int posicionUltimaArea = listaAreas.size();    // ¿Si cuando se agrega un area se cancela la operacion devuelve -1?
-         return posicionUltimaArea;                     //¿Como hago para que se actualize? ¿Archivos?
+         this.posicionUltimaArea = listaAreas.size();  
+         return this.posicionUltimaArea;     //CHEQUEAR IMPLEMENTACION                     
      }
 
     public void cancelar()    
      {
-         int auxiliar = -1;
-         auxiliar = verUltimaArea();        //CHEQUEAR IMPLEMENTACION.
+         this.posicionUltimaArea= -1;
+                                    //CHEQUEAR IMPLEMENTACION.
      }
     
     public int ordenArea(Areas area)
@@ -169,56 +184,25 @@ import java.util.List;
             
         return posicion;        //Si no hubo coincidencias, retornamos el -1 por defecto.
     }
-
-
-    @Override
-    public void mostrarAreas() 
-    {
-        
-        Collections.sort(listaAreas);       //Ordeno alfabeticamente.
-		
-        for( Areas unArea : listaAreas)
-        {
-            System.out.println(unArea.toString());      //Muestro areas una por una.
-        }
-    }
-    
-    /**
-     * Metodo usado en el metodo getValueAt al modelar la tabla. 
-     * @param posicion
-     * @return La posicion indicada en nuestra tabla.
-     */
-    public Areas obtenerArea(int posicion)
-    {
-        return this.listaAreas.get(posicion);
-    }
-    
-    /**
-     * Metodo usado en el metodo getRowCount al modelar la tabla. 
-     * @return  El numero de filas de nuestra tabla 
-     */
-    public int cantidadAreas()
-    {
-        return this.listaAreas.size();
-    }
     
     
     public String escribirAreas()
     {
+        File f = new File("Areas.txt");
         try 
         {
-            File f = new File("Areas.txt");
             FileWriter fw = new FileWriter(f);
             BufferedWriter bfw = new BufferedWriter(fw);
             
             for( Areas i : listaAreas)
             {
                 bfw.write(i.getNombre()+"\n");
+                bfw.newLine();
             }
-            
             bfw.close();
-			return ESCRITURA_OK;
-        } catch (IOException ex) 
+            return ESCRITURA_OK;        
+        } 
+        catch (IOException ex) 
         {
 			return ESCRITURA_ERROR;
         }
@@ -226,28 +210,27 @@ import java.util.List;
    
     public String leerAreas()
     {
-        String nombreArea;
+        File f = new File("Areas.txt");
         
+        if(f.exists())
         try 
         {
-            File f = new File("Areas.txt");
             FileReader fr = new FileReader(f);
             BufferedReader bfr = new BufferedReader(fr);
-            Areas Unarea;
-            
+            String nombreArea;
             while( ( nombreArea = bfr.readLine() )!= null )
             {
                 
                 GestorAreas.instanciar().nuevaArea(nombreArea);
             }
-         
             bfr.close();
-            return LECTURA_OK;
+            return LECTURA_OK;              
         }
         catch (IOException ex) 
         {
             return LECTURA_ERROR;
         }
+        return ARCHIVO_INEXISTENTE;
     }
     
     

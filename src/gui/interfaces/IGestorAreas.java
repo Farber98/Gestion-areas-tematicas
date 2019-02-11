@@ -16,7 +16,9 @@ public interface IGestorAreas {
     public static final String ESCRITURA_ERROR = "Error: No se guardaron las areas.";
     public static final String ESCRITURA_OK = "Se guardaron las áreas";    
 
-    //Constantes para el ABM de áreas    
+    //Constantes para el ABM de áreas 
+    
+    public static final String ERROR_NUEVA_AREA = "Error: No se pudo crear el area.";
     public static final String ERROR_NUEVA_AREA_VACIA = "Error: El nombre no puede estar vacio.";
     public static final String ERROR_NUEVA_AREA_DUPLICADA = "Error: Ya existe un área con ese nombre.";
     public static final String EXITO_NUEVA_AREA = "Area creada con éxito.";
@@ -81,11 +83,6 @@ public interface IGestorAreas {
      * @return int  - orden que ocupa el área
      */
     public int ordenArea(Areas area);    
-        
-    /**
-     * Muestra las areas contenidas en nuestra lista.
-     */
-    public void mostrarAreas();
     
     /**
      * Guarda las areas en un archivo de texto.

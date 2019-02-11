@@ -19,7 +19,7 @@ public class ControladorAMArea implements IControladorAMArea
     @Override
     public void btnCancelarClic(ActionEvent evt) 
     {
-        
+        dispose();
     }
 
     @Override
