@@ -12,6 +12,7 @@ import gui.interfaces.IGestorAreas;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import javax.swing.JDialog;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -37,12 +38,15 @@ public class ControladorAMArea implements IControladorAMArea
 
     @Override
     public void txtNombrePresionarTecla(KeyEvent evt) 
-    {
+    {   
         char caracter = evt.getKeyChar();
         if(caracter == KeyEvent.VK_ENTER)       //Cuando se presione enter se guarda.
         {
             this.guardar();
         }
+
+    if(!(Character.isAlphabetic(caracter) ||  (caracter == KeyEvent.VK_BACK_SPACE)||  caracter == KeyEvent.VK_DELETE ))
+        evt.consume();      //Estos eventos seran consumidos y no seran recibidos por el listener.
         
         //Chequear implementacion
     }
@@ -57,7 +61,22 @@ public class ControladorAMArea implements IControladorAMArea
     
     private void guardar()
     {
-        //Como implementamos este metodo
+        String estado;
+        String nombreArea;
+        IGestorAreas miGestorAreas = GestorAreas.instanciar();
+        nombreArea = this.vista.getTxtNombreArea().getText();   //Tomamos el texto almacenado en el TextField de nuestra VentanaCrearArea.
+        estado = miGestorAreas.nuevaArea(nombreArea);            //Como nuevaArea devuelve una cadena de texto informando el estado de nuestra operacion, lo agarramos en la variable estado.
+        if(estado.equals(IGestorAreas.EXITO_NUEVA_AREA))         
+        {
+            this.vista.dispose();           //En caso de ser exitosa la operacion, la ventana se cierra porque el area fue creada.
+        }
+        else
+        {
+            miGestorAreas.cancelar();       //En caso de que haya un error en el guardado, la operacion se cancela.
+            JOptionPane.showMessageDialog(null,"Error: No se pudo crear el area.","Crear nueva area" , JOptionPane.ERROR_MESSAGE);      //Mostramos un mensaje de error con el icono de error en caso de que no se pueda crear el area nueva.
+        
+        }           
+        //Chequear metodo.
     }
     
     

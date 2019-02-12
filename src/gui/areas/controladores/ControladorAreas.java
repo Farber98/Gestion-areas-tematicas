@@ -68,7 +68,7 @@ public class ControladorAreas implements IControladorAreas
     @Override
     public void txtNombrePresionarTecla(KeyEvent evt) 
     {
-        if(evt.getKeyChar() == KeyEvent.VK_ENTER)   //Cuando se presione se busca.
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER)   //Lo que hace getKeyCode() es devolver un numero entero. Si este numero entero coincide con el numero entero asignado a "Enter", entrara a la condicion. En otras palabras, al presionar enter se ejecuta el metodo buscar.
             this.buscar();
     }
     
@@ -80,8 +80,9 @@ public class ControladorAreas implements IControladorAreas
     
     private void configurarTabla(JTable tablaAreas)
     {
-//        ModeloTablaAreas modeloTabla = new ModeloTablaAreas(); //Que va en el parentesis?
-//        tablaAreas.setModel(modeloTabla);
+        ModeloTablaAreas modeloTabla = new ModeloTablaAreas(); //Que va en el parentesis?
+        tablaAreas.setModel(modeloTabla);
+        
         //Chequear implementacion
     }
     
