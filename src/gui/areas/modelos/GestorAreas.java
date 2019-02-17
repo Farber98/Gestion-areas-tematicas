@@ -6,6 +6,8 @@
 package gui.areas.modelos;
 
 import gui.interfaces.IGestorAreas;
+import gui.trabajos.modelos.GestorTrabajos;
+import gui.trabajos.modelos.Trabajo;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;

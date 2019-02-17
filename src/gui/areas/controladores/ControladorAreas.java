@@ -84,7 +84,7 @@ public class ControladorAreas implements IControladorAreas
     @Override
     public void ventanaGanaFoco(WindowEvent evt) 
     {
-        //Como implementar metodo
+       JTable tabla = this.vista.getTablaAreas();
     }
 
     @Override
