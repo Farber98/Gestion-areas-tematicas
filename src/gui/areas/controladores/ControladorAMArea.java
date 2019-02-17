@@ -64,7 +64,7 @@ public class ControladorAMArea implements IControladorAMArea
         String estado;
         String nombreArea;
         IGestorAreas miGestorAreas = GestorAreas.instanciar();
-        nombreArea = this.vista.getTxtNombreArea().getText();   //Tomamos el texto almacenado en el TextField de nuestra VentanaCrearArea.
+        nombreArea = this.vista.getTxtNombreArea().getText().trim();   //Tomamos el texto almacenado en el TextField de nuestra VentanaCrearArea. Eliminamos espacios en blanco al principio y al final con trim().
         estado = miGestorAreas.nuevaArea(nombreArea);            //Como nuevaArea devuelve una cadena de texto informando el estado de nuestra operacion, lo agarramos en la variable estado.
         if(estado.equals(IGestorAreas.EXITO_NUEVA_AREA))         
         {

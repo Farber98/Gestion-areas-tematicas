@@ -85,6 +85,7 @@ public class ControladorAreas implements IControladorAreas
     public void ventanaGanaFoco(WindowEvent evt) 
     {
        JTable tabla = this.vista.getTablaAreas();
+       this.configurarTabla(tabla);
     }
 
     @Override
@@ -97,13 +98,18 @@ public class ControladorAreas implements IControladorAreas
     private void buscar()
     {
         String nombreArea;
-        if(!this.vista.getTxtBuscar().getText().isEmpty())
+        if(!this.vista.getTxtBuscar().getText().trim().isEmpty())
         {
-            nombreArea = this.vista.getTxtBuscar().getText();
+            nombreArea = this.vista.getTxtBuscar().getText().trim();
             ModeloTablaAreas modeloTabla = new ModeloTablaAreas(nombreArea);
             JTable tabla = this.vista.getTablaAreas();
             tabla.setModel(modeloTabla);
         }
+        else
+            nombreArea = null;
+            ModeloTablaAreas modeloTabla = new ModeloTablaAreas(nombreArea);
+            JTable tabla = this.vista.getTablaAreas();
+            tabla.setModel(modeloTabla);
     }
     
     private void configurarTabla(JTable tablaAreas)

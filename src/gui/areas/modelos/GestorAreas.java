@@ -49,7 +49,7 @@ import java.util.List;
         String escritura = this.escribirAreas();
         Areas UnArea;
         
-        if (nombre.isEmpty() || nombre == null)    //Si el nombre esta vacio o es nulo
+        if (nombre.trim().isEmpty() || nombre == null)    //Si el nombre esta vacio o es nulo
         {
             return ERROR_NUEVA_AREA_VACIA; 
         }
@@ -122,7 +122,7 @@ import java.util.List;
     {
         List<Areas> areasBuscadas = new ArrayList<>();
         
-        if( nombre == null || nombre.isEmpty() )   //Si el nombre es igual a nulo o esta vacio       
+        if( nombre == null  || nombre.isEmpty())   //Si el nombre es igual a nulo o esta vacio       
         {
             Collections.sort(listaAreas);       //Ordeno alfabeticamente y devuelto todo.
             return listaAreas;                      
@@ -190,7 +190,7 @@ import java.util.List;
     
     public String escribirAreas()
     {
-        File f = new File("Areas.txt");
+        File f = new File("./Areas.txt");
         try 
         {
             FileWriter fw = new FileWriter(f);
@@ -198,7 +198,7 @@ import java.util.List;
             
             for( Areas i : listaAreas)
             {
-                bfw.write(i.getNombre()+"\n");
+                bfw.write(i.getNombre());
                 bfw.newLine();
             }
             bfw.close();
@@ -212,25 +212,26 @@ import java.util.List;
    
     public String leerAreas()
     {
-        File f = new File("Areas.txt");
+        File f = new File("./Areas.txt");
         
         if(f.exists())
-        try 
         {
-            FileReader fr = new FileReader(f);
-            BufferedReader bfr = new BufferedReader(fr);
-            String nombreArea;
-            while( ( nombreArea = bfr.readLine() )!= null )
+            try (BufferedReader bfr = new BufferedReader(new FileReader(f)))
             {
-                
-                GestorAreas.instanciar().nuevaArea(nombreArea);
+            
+                String nombreArea;
+                while( ( nombreArea = bfr.readLine() ) != null )
+                {
+                    Areas unArea = new Areas(nombreArea);
+                    this.listaAreas.add(unArea);
+                }
+                bfr.close();
+                return LECTURA_OK;              
             }
-            bfr.close();
-            return LECTURA_OK;              
-        }
-        catch (IOException ex) 
-        {
-            return LECTURA_ERROR;
+            catch (IOException ex) 
+            {
+                return LECTURA_ERROR;
+            }
         }
         return ARCHIVO_INEXISTENTE;
     }
