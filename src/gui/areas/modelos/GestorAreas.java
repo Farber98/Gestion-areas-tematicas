@@ -64,7 +64,7 @@ import java.util.List;
         Collections.sort(this.listaAreas); //Ordenamos areas alfabeticamente.
         if(escritura.equals(ESCRITURA_OK))
         {
-            //VER AQUI
+            escribirAreas();            //Actualizo archivo.
             return EXITO_NUEVA_AREA;
         }
         
@@ -105,6 +105,7 @@ import java.util.List;
                 i = null;
                 if(escritura.equals(ESCRITURA_OK))   //Si la escritura se realiza sin errores.
                 {
+                    escribirAreas();                //Actualizo archivo.
                     return EXITO_BORRAR_AREA;
                 }
                 else
@@ -121,16 +122,17 @@ import java.util.List;
     public List<Areas> buscarAreas(String nombre) 
     {
         List<Areas> areasBuscadas = new ArrayList<>();
+        List<Areas> listaVacia = new ArrayList<>();
         
-        if( nombre == null  || nombre.isEmpty())   //Si el nombre es igual a nulo o esta vacio       
+        if(nombre == null || nombre.isEmpty())   //Si el nombre es igual a nulo o esta vacio       
         {
             Collections.sort(listaAreas);       //Ordeno alfabeticamente y devuelto todo.
             return listaAreas;                      
         }
         
-        for( Areas area : listaAreas)
+        for(Areas area : listaAreas)
         {
-            if( area.getNombre().toUpperCase().startsWith(nombre.toUpperCase()))      //Comparo si coinciden los nombres en mayusculas. Metodo starts with para implementar busqueda parcial. 
+            if(area.getNombre().toUpperCase().startsWith(nombre.toUpperCase()))      //Comparo si coinciden los nombres en mayusculas. Metodo starts with para implementar busqueda parcial. 
             { 
                 areasBuscadas.add(area);        //Si coinciden, agrego esa area a la lista a retornar.
             }
@@ -138,7 +140,7 @@ import java.util.List;
         
         if(areasBuscadas.isEmpty())
         { 
-            return null;            //Si no se encontraron coincidencias, devuelvo null.
+            return listaVacia;            //Si no se encontraron coincidencias, devuelvo la lista vacia.
         }
         
         Collections.sort(areasBuscadas);

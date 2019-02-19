@@ -41,7 +41,7 @@ public class ModeloTablaAreas extends AbstractTableModel
     public Object getValueAt(int fila, int columna) 
     {
         Areas unArea = this.areas.get(fila);    //Buscamos la posicion de la fila.
-        return unArea.getNombre();              //Devolvemos el nombre del area ubicada en esa fila.
+        return unArea.getNombre().toUpperCase();              //Devolvemos el nombre del area ubicada en esa fila. Todo en mayusculas para omitir errores de tipeo.
     }
     
     public String getColumnName(int columna)

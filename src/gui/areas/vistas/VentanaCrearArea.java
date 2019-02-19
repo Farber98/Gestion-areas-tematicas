@@ -39,6 +39,7 @@ public class VentanaCrearArea extends JDialog
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Crear nueva area");
+        setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setResizable(false);
 
         txtNombreArea.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -97,6 +98,8 @@ public class VentanaCrearArea extends JDialog
         );
 
         txtNombreArea.getAccessibleContext().setAccessibleName("");
+
+        getAccessibleContext().setAccessibleDescription("");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
