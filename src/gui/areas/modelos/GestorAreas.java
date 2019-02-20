@@ -45,7 +45,8 @@ import java.util.List;
     
     // <editor-fold defaultstate="collapsed" desc="METODOS">
         @Override
-        public String nuevaArea(String nombre) {
+        public String nuevaArea(String nombre) 
+        {
             String escritura = this.escribirAreas(); //Como el metodo escribirAreas devuelve un String con el resultado de la operacion, lo almacenamos en la variable escritura.
             Area UnArea;
             
@@ -73,7 +74,8 @@ import java.util.List;
         }
         
         @Override
-        public String borrarArea(Area area) {
+        public String borrarArea(Area area) 
+        {
             String escritura = this.escribirAreas();
             GestorTrabajos miGestorTrabajos = GestorTrabajos.instanciar();
             
@@ -87,14 +89,16 @@ import java.util.List;
                 return ERROR_BORRAR_AREA_INEXISTENTE;                
             }
             
-            for (Trabajo i : miGestorTrabajos.buscarTrabajos()) {                
+            for (Trabajo i : miGestorTrabajos.buscarTrabajos()) 
+            {                
                 if (i.getAreas().contains(area)) 
                 {                    
                     return ERROR_BORRAR_AREA_EN_USO;     //No podemos borrar un area contenida en un trabajo.
                 }
             }
             
-            for (Area i : listaAreas) {
+            for (Area i : listaAreas) 
+            {
                 if (i.equals(area))      //Si algun area de la lista es igual al area que se quiere borrar.
                 {
                     
@@ -104,7 +108,10 @@ import java.util.List;
                     {
                         escribirAreas();                //Actualizo archivo.
                         return EXITO_BORRAR_AREA;
-                    } else {
+                        
+                    } 
+                    else 
+                    {
                         return ESCRITURA_ERROR;
                     }
                 }
@@ -114,7 +121,8 @@ import java.util.List;
         }
         
         @Override
-        public List<Area> buscarAreas(String nombre) {
+        public List<Area> buscarAreas(String nombre) 
+        {
             List<Area> areasBuscadas = new ArrayList<>();
             List<Area> listaVacia = new ArrayList<>();
             
@@ -124,14 +132,16 @@ import java.util.List;
                 return listaAreas;                
             }
             
-            for (Area area : listaAreas) {
+            for (Area area : listaAreas) 
+            {
                 if (area.verNombre().toUpperCase().startsWith(nombre.toUpperCase())) //Comparo si coinciden los nombres en mayusculas. Metodo StartsWith para implementar busqueda parcial. 
                 {                    
                     areasBuscadas.add(area);        //Si coinciden, agrego esa area a la lista a retornar.
                 }
             }
             
-            if (areasBuscadas.isEmpty()) {                
+            if (areasBuscadas.isEmpty()) 
+            {                
                 return listaVacia;            //Si no se encontraron coincidencias, devuelvo la lista vacia.
             }
             
@@ -140,9 +150,11 @@ import java.util.List;
         }
         
         @Override
-        public Area dameArea(String nombre) {
+        public Area dameArea(String nombre) 
+        {
             
-            for (Area unArea : listaAreas) {
+            for (Area unArea : listaAreas) 
+            {
                 if (unArea.verNombre().equalsIgnoreCase(nombre)) // En caso de coincidencia, devuelve ese nombre. Sino sigue buscando.
                 {
                     return unArea;
@@ -151,19 +163,24 @@ import java.util.List;
             return null; // Si no se encontro area devolvemos nulo.
         }
         
-        public int verUltimaArea() {            
+        public int verUltimaArea() 
+        {            
             this.posicionUltimaArea = listaAreas.size();     //El metodo size devuelve el tamaño de la lista. Lo que haremos sera almacenar el tamaño en la variable posicionUltimaArea ya que ahi se encontrara el ultimo elemento de la tabla. 
             return this.posicionUltimaArea;                          
         }
         
-        public void cancelar() {
+        public void cancelar() 
+        {
             this.posicionUltimaArea = -1;  //Asigmanos la variable posicionUltimaArea en -1.
         }
         
-        public int ordenArea(Area area) {
+        public int ordenArea(Area area) 
+        {
             int posicion = -1;
-            for (Area unArea : listaAreas) {
-                if (area.equals(unArea)) {
+            for (Area unArea : listaAreas) 
+            {
+                if (area.equals(unArea)) 
+                {
                     posicion = listaAreas.indexOf(unArea);  //Metodo indexOf devuelve la posicion de unArea, la cual coincide con el parametro area que recibe el metodo.
                     return posicion;                    
                 }
@@ -175,9 +192,11 @@ import java.util.List;
 // </editor-fold>  
     
     // <editor-fold defaultstate="collapsed" desc="ARCHIVOS">
-        public String escribirAreas() {
+        public String escribirAreas() 
+        {
             File f = new File("./Areas.txt");
-            try {
+            try 
+            {
                 FileWriter fw = new FileWriter(f);
                 BufferedWriter bfw = new BufferedWriter(fw);
                 
@@ -187,25 +206,32 @@ import java.util.List;
                 }
                 bfw.close();
                 return ESCRITURA_OK;                
-            } catch (IOException ex) {
+            } 
+            catch (IOException ex) 
+            {
                 return ESCRITURA_ERROR;
             }
         }
         
-        public String leerAreas() {
+        public String leerAreas() 
+        {
             File f = new File("./Areas.txt");
             
-            if (f.exists()) {
+            if (f.exists()) 
+            {
                 try (BufferedReader bfr = new BufferedReader(new FileReader(f))) {
                     
                     String nombreArea;
-                    while ((nombreArea = bfr.readLine()) != null) {
+                    while ((nombreArea = bfr.readLine()) != null) 
+                    {
                         Area unArea = new Area(nombreArea);
                         this.listaAreas.add(unArea);
                     }
                     bfr.close();
                     return LECTURA_OK;                    
-                } catch (IOException ex) {
+                } 
+                catch (IOException ex) 
+                {
                     return LECTURA_ERROR;
                 }
             }

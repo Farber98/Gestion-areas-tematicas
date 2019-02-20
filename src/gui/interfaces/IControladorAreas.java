@@ -11,12 +11,7 @@ import java.awt.event.WindowEvent;
 
 
 public interface IControladorAreas {
-    public static final String AREA_NUEVA = "Areas - Nueva";
-    public static final String TITULO = "Areas";
-    public static final String CONFIRMACION = "¿Desea borrar el área especificada?";
-    public static final String OPERACION_ALTA = "Alta";
-    public static final String OPERACION_BAJA = "Baja";    
-    public static final String OPERACION_NINGUNA = "Ninguna";    
+   
     
     /**
      * Acción a ejecutar cuando se selecciona el botón Nueva
