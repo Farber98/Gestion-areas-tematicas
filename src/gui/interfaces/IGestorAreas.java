@@ -5,7 +5,7 @@
  */
 package gui.interfaces;
 
-import gui.areas.modelos.Areas;
+import gui.areas.modelos.Area;
 import java.util.List;
 
 public interface IGestorAreas {
@@ -39,7 +39,7 @@ public interface IGestorAreas {
      * @param area área a borrar
      * @return String  - cadena con el resultado de la operación
      */
-    public String borrarArea(Areas area);
+    public String borrarArea(Area area);
     
     /**
      * Busca si existe un área con el nombre especificado (total o parcialmente)
@@ -48,7 +48,7 @@ public interface IGestorAreas {
      * @param nombre nombre del área a buscar
      * @return List<Area>  - lista de áreas, ordenadas por nombre, cuyos nombres coincidan con el especificado
     */                                                                           
-    public List<Areas> buscarAreas(String nombre);
+    public List<Area> buscarAreas(String nombre);
     
     /**
      * Busca si existe un área que coincida con el nombre especificado
@@ -58,7 +58,7 @@ public interface IGestorAreas {
      * @param nombre nombre del área a buscar
      * @return Area  - objeto Area cuyo nombre coincida con el nombre especificado, o null
      */
-    public Areas dameArea(String nombre);
+    public Area dameArea(String nombre);
     
     /**
      * Devuelve la posición de la última área agregada
@@ -82,7 +82,7 @@ public interface IGestorAreas {
      * @param area área al cual se le determina el orden
      * @return int  - orden que ocupa el área
      */
-    public int ordenArea(Areas area);    
+    public int ordenArea(Area area);    
     
     /**
      * Guarda las areas en un archivo de texto.

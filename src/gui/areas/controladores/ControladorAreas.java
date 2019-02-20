@@ -1,5 +1,5 @@
 package gui.areas.controladores;
-import gui.areas.modelos.Areas;
+import gui.areas.modelos.Area;
 import gui.areas.modelos.GestorAreas;
 import gui.areas.modelos.ModeloTablaAreas;
 import gui.areas.vistas.VentanaAreas;
@@ -39,7 +39,7 @@ public class ControladorAreas implements IControladorAreas
     @Override
     public void btnBorrarClic(ActionEvent evt) {
         GestorAreas gestorAreas = GestorAreas.instanciar();
-        Areas unArea = this.dameAreaSeleccionada();
+        Area unArea = this.dameAreaSeleccionada();
         if (unArea == null)             //No hay ningun area seleccionada.
         {
             gestorAreas.cancelar();     
@@ -114,7 +114,7 @@ public class ControladorAreas implements IControladorAreas
         tablaAreas.setModel(modeloTabla);
     }
     
-    private Areas dameAreaSeleccionada() {
+    private Area dameAreaSeleccionada() {
         JTable tabla = this.vista.getTablaAreas();
         if (tabla.getSelectedRow() == -1)       //No hay ninguna fila seleccionada.
         {

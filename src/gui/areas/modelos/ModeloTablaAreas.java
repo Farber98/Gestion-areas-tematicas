@@ -17,7 +17,7 @@ public class ModeloTablaAreas extends AbstractTableModel
 {
     // <editor-fold defaultstate="collapsed" desc="VARIABLES DE INSTANCIA">
 
-    private List<Areas> areas;
+    private List<Area> areas;
     private List<String> columnas = new ArrayList<>();
 
 // </editor-fold>
@@ -44,15 +44,15 @@ public class ModeloTablaAreas extends AbstractTableModel
     
     @Override
     public Object getValueAt(int fila, int columna) {
-        Areas unArea = this.areas.get(fila);            //Buscamos la posicion de la fila.
-        return unArea.getNombre().toUpperCase();              //Devolvemos el nombre del area ubicada en esa fila. Todo en mayusculas para omitir errores de tipeo.
+        Area unArea = this.areas.get(fila);            //Buscamos la posicion de la fila.
+        return unArea.verNombre().toUpperCase();              //Devolvemos el nombre del area ubicada en esa fila. Todo en mayusculas para omitir errores de tipeo.
     }
     
     public String getColumnName(int columna) {
         return this.columnas.get(columna);      //Obtenemos el nombre de la columna especificada.
     }
     
-    public Areas obtenerArea(int fila) {
+    public Area obtenerArea(int fila) {
         return this.areas.get(fila);            //Obtenemos el nombre del area de la fila especificada.
     }
 

@@ -20,7 +20,7 @@ import java.util.List;
     // <editor-fold defaultstate="collapsed" desc="VARIABLES DE INSTANCIA">
 
         private static GestorAreas gestor;
-        private List<Areas> listaAreas = new ArrayList<>();
+        private List<Area> listaAreas = new ArrayList<>();
         private int posicionUltimaArea;
 
 // </editor-fold>  
@@ -47,14 +47,14 @@ import java.util.List;
         @Override
         public String nuevaArea(String nombre) {
             String escritura = this.escribirAreas(); //Como el metodo escribirAreas devuelve un String con el resultado de la operacion, lo almacenamos en la variable escritura.
-            Areas UnArea;
+            Area UnArea;
             
             if (nombre.trim().isEmpty() || nombre == null) //Si el nombre esta vacio o es nulo.
             {
                 return ERROR_NUEVA_AREA_VACIA;                
             }
             
-            UnArea = new Areas(nombre);
+            UnArea = new Area(nombre);
             if (listaAreas.contains(UnArea)) //Si la lista ya contiene dicha area.
             {
                 return ERROR_NUEVA_AREA_DUPLICADA;                
@@ -73,7 +73,7 @@ import java.util.List;
         }
         
         @Override
-        public String borrarArea(Areas area) {
+        public String borrarArea(Area area) {
             String escritura = this.escribirAreas();
             GestorTrabajos miGestorTrabajos = GestorTrabajos.instanciar();
             
@@ -94,7 +94,7 @@ import java.util.List;
                 }
             }
             
-            for (Areas i : listaAreas) {
+            for (Area i : listaAreas) {
                 if (i.equals(area))      //Si algun area de la lista es igual al area que se quiere borrar.
                 {
                     
@@ -114,9 +114,9 @@ import java.util.List;
         }
         
         @Override
-        public List<Areas> buscarAreas(String nombre) {
-            List<Areas> areasBuscadas = new ArrayList<>();
-            List<Areas> listaVacia = new ArrayList<>();
+        public List<Area> buscarAreas(String nombre) {
+            List<Area> areasBuscadas = new ArrayList<>();
+            List<Area> listaVacia = new ArrayList<>();
             
             if (nombre == null || nombre.isEmpty()) //Si el nombre es igual a nulo o esta vacio       
             {
@@ -124,8 +124,8 @@ import java.util.List;
                 return listaAreas;                
             }
             
-            for (Areas area : listaAreas) {
-                if (area.getNombre().toUpperCase().startsWith(nombre.toUpperCase())) //Comparo si coinciden los nombres en mayusculas. Metodo StartsWith para implementar busqueda parcial. 
+            for (Area area : listaAreas) {
+                if (area.verNombre().toUpperCase().startsWith(nombre.toUpperCase())) //Comparo si coinciden los nombres en mayusculas. Metodo StartsWith para implementar busqueda parcial. 
                 {                    
                     areasBuscadas.add(area);        //Si coinciden, agrego esa area a la lista a retornar.
                 }
@@ -140,10 +140,10 @@ import java.util.List;
         }
         
         @Override
-        public Areas dameArea(String nombre) {
+        public Area dameArea(String nombre) {
             
-            for (Areas unArea : listaAreas) {
-                if (unArea.getNombre().equalsIgnoreCase(nombre)) // En caso de coincidencia, devuelve ese nombre. Sino sigue buscando.
+            for (Area unArea : listaAreas) {
+                if (unArea.verNombre().equalsIgnoreCase(nombre)) // En caso de coincidencia, devuelve ese nombre. Sino sigue buscando.
                 {
                     return unArea;
                 }
@@ -160,9 +160,9 @@ import java.util.List;
             this.posicionUltimaArea = -1;  //Asigmanos la variable posicionUltimaArea en -1.
         }
         
-        public int ordenArea(Areas area) {
+        public int ordenArea(Area area) {
             int posicion = -1;
-            for (Areas unArea : listaAreas) {
+            for (Area unArea : listaAreas) {
                 if (area.equals(unArea)) {
                     posicion = listaAreas.indexOf(unArea);  //Metodo indexOf devuelve la posicion de unArea, la cual coincide con el parametro area que recibe el metodo.
                     return posicion;                    
@@ -181,8 +181,8 @@ import java.util.List;
                 FileWriter fw = new FileWriter(f);
                 BufferedWriter bfw = new BufferedWriter(fw);
                 
-                for (Areas i : listaAreas) {
-                    bfw.write(i.getNombre());
+                for (Area i : listaAreas) {
+                    bfw.write(i.verNombre());
                     bfw.newLine();
                 }
                 bfw.close();
@@ -200,7 +200,7 @@ import java.util.List;
                     
                     String nombreArea;
                     while ((nombreArea = bfr.readLine()) != null) {
-                        Areas unArea = new Areas(nombreArea);
+                        Area unArea = new Area(nombreArea);
                         this.listaAreas.add(unArea);
                     }
                     bfr.close();
