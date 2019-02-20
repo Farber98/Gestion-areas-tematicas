@@ -1,10 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package gui.areas.vistas;
-
 import gui.interfaces.IControladorAreas;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
@@ -22,7 +16,7 @@ public class VentanaAreas extends JDialog
     public VentanaAreas(IControladorAreas controlador, JFrame parent) 
     {
         super(parent, true);    //Hacemos modal la ventana.
-        initComponents();
+        initComponents();       //Cargamos los objetos de la vista
         this.controlador = controlador;
     }
 
@@ -36,7 +30,7 @@ public class VentanaAreas extends JDialog
         return this.txtBuscar;
     }
     
-    @SuppressWarnings("unchecked")
+    @SuppressWarnings("unchecked")              //Pasamos los eventos como parametros al controlador.
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
