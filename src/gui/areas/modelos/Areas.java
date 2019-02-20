@@ -16,23 +16,23 @@ import java.util.Objects;
     
     {
     
-        // <editor-fold defaultstate="collapsed" desc="Variables de instancia">
+        // <editor-fold defaultstate="collapsed" desc="VARIABLES DE INSTANCIA">
         private String nombre;
 
 // </editor-fold>
 
-        // <editor-fold defaultstate="collapsed" desc="Constructor">
+        // <editor-fold defaultstate="collapsed" desc="CONSTRUCTOR">
         public Areas(String nombre) {
             this.nombre = nombre;
         }
 
 // </editor-fold>
 	
-        // <editor-fold defaultstate="collapsed" desc="Metodos">
+        // <editor-fold defaultstate="collapsed" desc="METODOS">
         @Override
         public int compareTo(Areas o) 
         {
-            return this.nombre.compareToIgnoreCase(o.nombre);
+            return this.nombre.compareToIgnoreCase(o.nombre);       //Usamos el metodo IgnoreCase para ignorar mayusculas y minusculas.
         }
         
         @Override
@@ -43,7 +43,7 @@ import java.util.Objects;
 
 // </editor-fold>
 	
-        //<editor-fold desc="Get && Set">
+        //<editor-fold desc="GET & SET">
     public String getNombre() {
         return nombre;
     }
@@ -53,7 +53,7 @@ import java.util.Objects;
     }
     //</editor-fold>
 	
-        // <editor-fold defaultstate="collapsed" desc="Equals y Hashcode">
+        // <editor-fold defaultstate="collapsed" desc="EQUALS Y HASHCODE">
         @Override
         public int hashCode() {
             int hash = 7;
