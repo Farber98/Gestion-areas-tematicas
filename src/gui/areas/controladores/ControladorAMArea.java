@@ -36,20 +36,39 @@ public class ControladorAMArea implements IControladorAMArea
         this.guardar();
     }
     
-//     || caracter == KeyEvent.VK_ENTER || caracter == KeyEvent.VK_DELETE || caracter == KeyEvent.VK_SPACE || caracter == KeyEvent.VK_BACK_SPACE || caracter == KeyEvent.VK_SHIFT || caracter == KeyEvent.VK_CAPS_LOCK
     
     @Override
     public void txtNombrePresionarTecla(KeyEvent evt) 
     {        
-        char caracter = evt.getKeyChar();
-        if(!Character.isLetter(caracter))
+        char validar = evt.getKeyChar();
+        char a = KeyEvent.VK_DELETE;        //¿Borrar lo que se tipee mal?
+        if(!(validar == KeyEvent.VK_BACK_SPACE || validar == KeyEvent.VK_DELETE || validar == KeyEvent.VK_SPACE || validar == KeyEvent.VK_ENTER ||Character.isLetter(validar))) //Si el caracter ingresado no es una letra ni Backspace, Space, Enter o Delete el evento no es escuchado por el listener.
         {
-            if(!(caracter == KeyEvent.VK_BACK_SPACE) && !(caracter == KeyEvent.VK_SPACE) && !(caracter == KeyEvent.VK_ENTER))
-                evt.consume();                      //Como hacer para que solo agarre letras, enter y backspace
-            if(caracter == KeyEvent.VK_ENTER)
-                this.guardar();
-            if(Character.isDigit(caracter))         //Por que sigue agarrando los numeros
-                evt.consume();
+           evt.consume();                   //¿Consumir lo que se tipee mal?
+           evt.setKeyChar(a);               //¿Borrar lo que se tipee mal?
+           JOptionPane.showMessageDialog(vista, "Ingrese solo letras","Advertencia", JOptionPane.WARNING_MESSAGE);
+           
+        }
+        if(validar == KeyEvent.VK_ENTER)
+        {
+            this.guardar();         //Se guarda al presionar enter.
+        }
+        
+    }
+            
+//            if( !(caracter == KeyEvent.VK_BACK_SPACE) && !(caracter == KeyEvent.VK_SPACE) && !(caracter == KeyEvent.VK_ENTER))
+//            {
+//                evt.consume();
+//            }//Como hacer para que solo agarre letras, enter y backspace
+//            if(caracter == KeyEvent.VK_ENTER)
+//            {
+//                this.guardar();
+//            }
+//            
+//            if(Character.isDigit(caracter))
+//            {//Por que sigue agarrando los numeros
+//                evt.consume();
+//            }
 //        }
 //        if(!( (Character.isAlphabetic(caracter) || caracter == KeyEvent.VK_BACK_SPACE || caracter == KeyEvent.VK_DELETE || caracter == KeyEvent.VK_SPACE)))        //Solo se aceptan caracteres alfabeticos.
 //        {
@@ -60,8 +79,7 @@ public class ControladorAMArea implements IControladorAMArea
 //        {
 //            this.guardar();
 //        }
-        }
-    }
+      
 //        char caracter = evt.getKeyChar();
 //        if(Character.isAlphabetic(caracter) || caracter == KeyEvent.VK_SPACE || caracter == KeyEvent.VK_BACK_SPACE || caracter == KeyEvent.VK_CLEAR || caracter == KeyEvent.VK_ENTER)        //Solo se aceptan caracteres alfabeticos.
 //        {
