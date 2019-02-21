@@ -17,7 +17,7 @@ public class ControladorAMArea implements IControladorAMArea
     // <editor-fold defaultstate="collapsed" desc="VARIABLES DE INSTANCIA">
 
     private VentanaCrearArea vista;
-    String tituloVentana = "Crear nueva area";
+    String TITULO_VENTANA = "Crear nueva area";
 
 // </editor-fold>
     
@@ -39,63 +39,22 @@ public class ControladorAMArea implements IControladorAMArea
     
     @Override
     public void txtNombrePresionarTecla(KeyEvent evt) 
-    {        
-        char validar = evt.getKeyChar();
-        if(!Character.isLetter(validar))    
-        {
-            switch(validar)
+    {
+        char caracter = evt.getKeyChar();
+        if( !((caracter == KeyEvent.VK_BACK_SPACE || caracter == KeyEvent.VK_SPACE || caracter == KeyEvent.VK_ENTER || Character.isLetter(caracter))))  //Solo permitimos que se tipeen letras, Backspace, Space y Delete.
             {
-                case KeyEvent.VK_ENTER:
-                    this.guardar();
-                    break;
-                case KeyEvent.VK_BACK_SPACE:
-                case KeyEvent.VK_DELETE:
-                case KeyEvent.VK_SPACE:
-                    break;
-                default:
-                    evt.consume();
+                evt.consume();          //En caso de no ser ninguno de los anteriores, el evento se consume y no es captado por el listener.
+                JOptionPane.showMessageDialog(vista, "Ingrese solo letras","Advertencia", JOptionPane.WARNING_MESSAGE); //Mostramos un mensaje de advertencia.
+                
             }
-        }
-    }
+            if(caracter == KeyEvent.VK_ENTER)
+            {
+                this.guardar();     //Si se detecta un enter, se ejecuta el metodo guardar.
+            }
             
-//            if( !(caracter == KeyEvent.VK_BACK_SPACE) && !(caracter == KeyEvent.VK_SPACE) && !(caracter == KeyEvent.VK_ENTER))
-//            {
-//                evt.consume();
-//            }//Como hacer para que solo agarre letras, enter y backspace
-//            if(caracter == KeyEvent.VK_ENTER)
-//            {
-//                this.guardar();
-//            }
-//            
-//            if(Character.isDigit(caracter))
-//            {//Por que sigue agarrando los numeros
-//                evt.consume();
-//            }
-//        }
-//        if(!( (Character.isAlphabetic(caracter) || caracter == KeyEvent.VK_BACK_SPACE || caracter == KeyEvent.VK_DELETE || caracter == KeyEvent.VK_SPACE)))        //Solo se aceptan caracteres alfabeticos.
-//        {
-//            evt.consume();
-//            JOptionPane.showMessageDialog(vista, "Ingrese solo letras","Advertencia", JOptionPane.WARNING_MESSAGE);
-//        }
-//        if(caracter == KeyEvent.VK_ENTER)
-//        {
-//            this.guardar();
-//        }
-      
-//        char caracter = evt.getKeyChar();
-//        if(Character.isAlphabetic(caracter) || caracter == KeyEvent.VK_SPACE || caracter == KeyEvent.VK_BACK_SPACE || caracter == KeyEvent.VK_CLEAR || caracter == KeyEvent.VK_ENTER)        //Solo se aceptan caracteres alfabeticos.
-//        {
-//            
-//            if (caracter == KeyEvent.VK_ENTER) //Cuando se presione enter se guarda.
-//            {
-//            this.guardar();
-//            }
-//        }
-//        else        //En caso de no ser alfabetico, limpiamos el caracter y mostramos una advertencia.
-//        {
-//            evt.setKeyChar((char)KeyEvent.VK_CLEAR);       //Limpiamos el caracter
-//            JOptionPane.showMessageDialog(vista, "Ingrese solo letras","Advertencia", JOptionPane.WARNING_MESSAGE);
-//        }
+    }
+        
+
 // </editor-fold>
 
     // <editor-fold defaultstate="collapsed" desc="CONSTRUCTOR">
@@ -123,7 +82,7 @@ public class ControladorAMArea implements IControladorAMArea
         estado = miGestorAreas.nuevaArea(nombreArea);            //Como nuevaArea devuelve una cadena de texto informando el estado de nuestra operacion, la guardamos en la variable estado.
         if (estado.equals(IGestorAreas.EXITO_NUEVA_AREA)) 
         {
-            JOptionPane.showMessageDialog(vista, IGestorAreas.EXITO_NUEVA_AREA,tituloVentana, JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(vista, IGestorAreas.EXITO_NUEVA_AREA +": '"+ nombreArea.toUpperCase()+"'",TITULO_VENTANA, JOptionPane.INFORMATION_MESSAGE);
             this.vista.dispose();           //En caso de ser exitosa la operacion, la ventana se cierra porque el area fue creada.
         }
         else
@@ -133,19 +92,19 @@ public class ControladorAMArea implements IControladorAMArea
             if(estado.equals(IGestorAreas.ERROR_NUEVA_AREA_DUPLICADA)) 
             {
                 miGestorAreas.cancelar();       //En caso de que haya un error en el guardado, la operacion se cancela. La variable posicionUltimaArea toma el valor -1.
-                JOptionPane.showMessageDialog(vista, IGestorAreas.ERROR_NUEVA_AREA_DUPLICADA, tituloVentana, JOptionPane.ERROR_MESSAGE);      //En caso de que no se pueda crear un area porque este duplicada, lo especificamos.
+                JOptionPane.showMessageDialog(vista, IGestorAreas.ERROR_NUEVA_AREA_DUPLICADA, TITULO_VENTANA, JOptionPane.ERROR_MESSAGE);      //En caso de que no se pueda crear un area porque este duplicada, lo especificamos.
             }
             
             if(estado.equals(IGestorAreas.ERROR_NUEVA_AREA_VACIA))
             {
                 miGestorAreas.cancelar();
-                JOptionPane.showMessageDialog(vista,IGestorAreas.ERROR_NUEVA_AREA_VACIA, tituloVentana,JOptionPane.ERROR_MESSAGE);          //En caso de que no se pueda crear un area porque el campo de texto este vacio, lo especificamos.
+                JOptionPane.showMessageDialog(vista,IGestorAreas.ERROR_NUEVA_AREA_VACIA, TITULO_VENTANA,JOptionPane.ERROR_MESSAGE);          //En caso de que no se pueda crear un area porque el campo de texto este vacio, lo especificamos.
             }
             
             if( ! (estado.equals(IGestorAreas.ERROR_NUEVA_AREA_DUPLICADA) || estado.equals(IGestorAreas.ERROR_NUEVA_AREA_VACIA) ) )
             {
                 miGestorAreas.cancelar();
-                JOptionPane.showMessageDialog(vista,IGestorAreas.ERROR_NUEVA_AREA, tituloVentana,JOptionPane.ERROR_MESSAGE);                //En caso de que no se pueda crear un area y no se deba a campo vacio o a duplicada, mensaje por defecto.
+                JOptionPane.showMessageDialog(vista,IGestorAreas.ERROR_NUEVA_AREA, TITULO_VENTANA,JOptionPane.ERROR_MESSAGE);                //En caso de que no se pueda crear un area y no se deba a campo vacio o a duplicada, mensaje por defecto.
             }
             
         }
