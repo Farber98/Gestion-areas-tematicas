@@ -49,7 +49,7 @@ public class ControladorAreas implements IControladorAreas
         } 
         else                          //Hay un area seleccionada.
         {
-            int opcion = JOptionPane.showConfirmDialog(vista, "¿Desea borrar el area " + dameAreaSeleccionada().verNombre().toUpperCase() + "?", "Borrar area", JOptionPane.YES_NO_OPTION);      //Ventana emergente para confirmar si se desea borrar un area.
+            int opcion = JOptionPane.showConfirmDialog(vista, "¿Desea borrar el area " +"'" +dameAreaSeleccionada().verNombre().toUpperCase() +"' " +"?", "Borrar area", JOptionPane.YES_NO_OPTION);      //Ventana emergente para confirmar si se desea borrar un area.
             if (opcion == JOptionPane.YES_OPTION) 
             {
                 String resultadoOperacion = gestorAreas.borrarArea(unArea);     //Devolvemos el resultado del metodo borrarArea. Cadena de texto con el resultado de la operacion.
