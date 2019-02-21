@@ -37,8 +37,8 @@ public class VentanaCrearArea extends JDialog
         setResizable(false);
 
         txtNombreArea.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                txtNombreAreaKeyPressed(evt);
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtNombrePresionarTecla(evt);
             }
         });
 
@@ -106,9 +106,9 @@ public class VentanaCrearArea extends JDialog
         this.controlador.btnCancelarClic(evt);
     }//GEN-LAST:event_botonCancelarActionPerformed
 
-    private void txtNombreAreaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreAreaKeyPressed
-        this.controlador.txtNombrePresionarTecla(evt);
-    }//GEN-LAST:event_txtNombreAreaKeyPressed
+    private void txtNombrePresionarTecla(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombrePresionarTecla
+              this.controlador.txtNombrePresionarTecla(evt);
+    }//GEN-LAST:event_txtNombrePresionarTecla
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -41,19 +41,21 @@ public class ControladorAMArea implements IControladorAMArea
     public void txtNombrePresionarTecla(KeyEvent evt) 
     {        
         char validar = evt.getKeyChar();
-        char a = KeyEvent.VK_DELETE;        //¿Borrar lo que se tipee mal?
-        if(!(validar == KeyEvent.VK_BACK_SPACE || validar == KeyEvent.VK_DELETE || validar == KeyEvent.VK_SPACE || validar == KeyEvent.VK_ENTER ||Character.isLetter(validar))) //Si el caracter ingresado no es una letra ni Backspace, Space, Enter o Delete el evento no es escuchado por el listener.
+        if(!Character.isLetter(validar))    
         {
-           evt.consume();                   //¿Consumir lo que se tipee mal?
-           evt.setKeyChar(a);               //¿Borrar lo que se tipee mal?
-           JOptionPane.showMessageDialog(vista, "Ingrese solo letras","Advertencia", JOptionPane.WARNING_MESSAGE);
-           
+            switch(validar)
+            {
+                case KeyEvent.VK_ENTER:
+                    this.guardar();
+                    break;
+                case KeyEvent.VK_BACK_SPACE:
+                case KeyEvent.VK_DELETE:
+                case KeyEvent.VK_SPACE:
+                    break;
+                default:
+                    evt.consume();
+            }
         }
-        if(validar == KeyEvent.VK_ENTER)
-        {
-            this.guardar();         //Se guarda al presionar enter.
-        }
-        
     }
             
 //            if( !(caracter == KeyEvent.VK_BACK_SPACE) && !(caracter == KeyEvent.VK_SPACE) && !(caracter == KeyEvent.VK_ENTER))
@@ -94,7 +96,6 @@ public class ControladorAMArea implements IControladorAMArea
 //            evt.setKeyChar((char)KeyEvent.VK_CLEAR);       //Limpiamos el caracter
 //            JOptionPane.showMessageDialog(vista, "Ingrese solo letras","Advertencia", JOptionPane.WARNING_MESSAGE);
 //        }
-
 // </editor-fold>
 
     // <editor-fold defaultstate="collapsed" desc="CONSTRUCTOR">
