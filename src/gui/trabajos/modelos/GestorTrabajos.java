@@ -1,13 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package gui.trabajos.modelos;
-
-import gui.trabajos.modelos.Trabajo;
+import gui.areas.modelos.Area;
+import gui.interfaces.IGestorAreas;
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  *
@@ -17,7 +11,8 @@ public class GestorTrabajos {
     private static GestorTrabajos gestor;
     private ArrayList<Trabajo> listaTrabajos = new ArrayList<>();
     
-    private GestorTrabajos(){}; // Constructor Privado// Constructor Privado// Constructor Privado// Constructor Privado// Constructor Privado// Constructor Privado// Constructor Privado// Constructor Privado
+    private GestorTrabajos(){};
+    
     
     public static GestorTrabajos instanciar(){
         
@@ -26,38 +21,27 @@ public class GestorTrabajos {
         }
         return gestor;
     }
-
-   
-   
-    public ArrayList<Trabajo> buscarTrabajos(String titulo) {
-		ArrayList<Trabajo> misTrabajos = new ArrayList<>();
-		
-		// VERIFICO LOS PARAMETROS.
-		
-		if(titulo.isEmpty()){
-			//Me aseguro que los trabajos no tengan nada y paso la lista.
-			misTrabajos.clear();
-			return misTrabajos;
-		}
-		
-		// VERIFICO QUE EL STRING ESTE CONTENIDA EN EL TITULO.
-		
-		for( Trabajo i : listaTrabajos){ 
-			if(titulo.toUpperCase().contains(i.getTitulo().toUpperCase())){
-				misTrabajos.add(i);
-			}
-		}
-		
-		return misTrabajos;
-	}
-	
-	public List<Trabajo> buscarTrabajos(){ //doy una copia de los trabajos.
-		List<Trabajo> misTrabajos = new ArrayList<>();
-		
-		misTrabajos.addAll(listaTrabajos);
-		
-		return misTrabajos;
-	}
+        
+        /**
+         * Metodo usado por GestorAreas para controlar si el area esta siendo usada por un trabajo.
+         * @param area
+         * @return STRING - (AREA_EN_USO || AREA_SIN_USO)
+         */
+        public String ChequearAreaEnTrabajo(Area area)    
+        {
+            for(Trabajo unTrabajo : this.listaTrabajos)
+            {
+                for(Area unArea : unTrabajo.verAreas())
+                {
+                    if(unArea.equals(area))
+                    {
+                        return IGestorAreas.AREA_EN_USO;
+                    }
+                }
+                
+            }
+            return IGestorAreas.AREA_SIN_USO;
+        }
 
     
 }

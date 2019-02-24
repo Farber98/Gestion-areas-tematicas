@@ -1,10 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package gui.interfaces;
-
 import gui.areas.modelos.Area;
 import java.util.List;
 
@@ -26,6 +20,8 @@ public interface IGestorAreas {
     public static final String ERROR_BORRAR_AREA_EN_USO = "Error: El área esta en uso.";
     public static final String ERROR_BORRAR_AREA_INEXISTENTE = "Error: El área no existe";
     public static final String EXITO_BORRAR_AREA = "Area borrada con éxito.";
+    public static final String AREA_EN_USO = "Area en uso por un trabajo";
+    public static final String AREA_SIN_USO = "Area no esta siendo usada por un trabajo";
     
     /**
      * Crea un nueva área

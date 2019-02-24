@@ -23,6 +23,7 @@ public class ControladorAreas implements IControladorAreas
 
     private VentanaAreas vista;
     private int dameAreaSelec;
+    String TITULO_VENTANA_BORRAR = "Borrar area";
 
 // </editor-fold>   
     
@@ -44,19 +45,19 @@ public class ControladorAreas implements IControladorAreas
         Area unArea = this.dameAreaSeleccionada();
         if (unArea == null)             //No hay ningun area seleccionada.
         {
-            JOptionPane.showMessageDialog(vista,"Por favor seleccione un area","Borrar area", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(vista,"Por favor seleccione un area",TITULO_VENTANA_BORRAR, JOptionPane.ERROR_MESSAGE);
             gestorAreas.cancelar();     
         } 
         else                          //Hay un area seleccionada.
         {
-            int opcion = JOptionPane.showConfirmDialog(vista, "¿Desea borrar el area " +"'" +dameAreaSeleccionada().verNombre().toUpperCase() +"' " +"?", "Borrar area", JOptionPane.YES_NO_OPTION);      //Ventana emergente para confirmar si se desea borrar un area.
+            int opcion = JOptionPane.showConfirmDialog(vista, "¿Desea borrar el area " +"'" +dameAreaSeleccionada().verNombre().toUpperCase() +"' " +"?", TITULO_VENTANA_BORRAR, JOptionPane.YES_NO_OPTION);      //Ventana emergente para confirmar si se desea borrar un area.
             if (opcion == JOptionPane.YES_OPTION) 
             {
                 String resultadoOperacion = gestorAreas.borrarArea(unArea);     //Devolvemos el resultado del metodo borrarArea. Cadena de texto con el resultado de la operacion.
                 if (!resultadoOperacion.equals(IGestorAreas.EXITO_BORRAR_AREA)) //Si el resultado no es exitoso, cancelamos la operacion.
                 {
                     gestorAreas.cancelar();
-                    JOptionPane.showMessageDialog(vista, "No se pudo borrar el area", "Error al borrar area", JOptionPane.ERROR_MESSAGE);   //Ventana emergente para informar que hubo un error al borrar el area.
+                    JOptionPane.showMessageDialog(vista, "No se pudo borrar el area", TITULO_VENTANA_BORRAR, JOptionPane.ERROR_MESSAGE);   //Ventana emergente para informar que hubo un error al borrar el area.
                 }
                 
             }

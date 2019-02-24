@@ -1,7 +1,6 @@
 package gui.areas.modelos;
 import gui.interfaces.IGestorAreas;
 import gui.trabajos.modelos.GestorTrabajos;
-import gui.trabajos.modelos.Trabajo;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -22,6 +21,7 @@ import java.util.List;
         private static GestorAreas gestor;
         private List<Area> listaAreas = new ArrayList<>();
         private int posicionUltimaArea;
+        String NOMBRE_ARCHIVO = "./Areas.txt";
 
 // </editor-fold>  
     
@@ -89,13 +89,12 @@ import java.util.List;
                 return ERROR_BORRAR_AREA_INEXISTENTE;                
             }
             
-            for (Trabajo i : miGestorTrabajos.buscarTrabajos()) 
-            {                
-                if (i.getAreas().contains(area)) 
-                {                    
-                    return ERROR_BORRAR_AREA_EN_USO;     //No podemos borrar un area contenida en un trabajo.
-                }
+                            
+            if (miGestorTrabajos.ChequearAreaEnTrabajo(area).equals(AREA_EN_USO)) 
+            {                    
+                return ERROR_BORRAR_AREA_EN_USO;     //No podemos borrar un area contenida en un trabajo.
             }
+            
             
             for (Area i : listaAreas) 
             {
@@ -194,7 +193,7 @@ import java.util.List;
     // <editor-fold defaultstate="collapsed" desc="ARCHIVOS">
         public String escribirAreas() 
         {
-            File f = new File("./Areas.txt");
+            File f = new File(NOMBRE_ARCHIVO);
             try 
             {
                 FileWriter fw = new FileWriter(f);
@@ -215,7 +214,7 @@ import java.util.List;
         
         public String leerAreas() 
         {
-            File f = new File("./Areas.txt");
+            File f = new File(NOMBRE_ARCHIVO);
             
             if (f.exists()) 
             {

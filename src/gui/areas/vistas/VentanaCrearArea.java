@@ -107,7 +107,7 @@ public class VentanaCrearArea extends JDialog
     }//GEN-LAST:event_botonCancelarActionPerformed
 
     private void txtNombrePresionarTecla(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombrePresionarTecla
-              this.controlador.txtNombrePresionarTecla(evt);
+        this.controlador.txtNombrePresionarTecla(evt);
     }//GEN-LAST:event_txtNombrePresionarTecla
 
 
