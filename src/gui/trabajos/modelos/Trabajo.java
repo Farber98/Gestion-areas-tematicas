@@ -15,6 +15,11 @@ import java.util.List;
  */
 public class Trabajo
 {	
+
+    public Trabajo(List<Area> unasAreas) 
+    {
+        this.unasAreas = unasAreas;
+    }
 	private List<Area> unasAreas;
 	
     public List<Area> verAreas()        //Implementamos solo lo necesario para chequear que un area no se encuentre en uso por un trabajo.

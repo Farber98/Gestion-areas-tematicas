@@ -14,9 +14,11 @@ public class GestorTrabajos {
     private GestorTrabajos(){};
     
     
-    public static GestorTrabajos instanciar(){
+    public static GestorTrabajos instanciar()
+    {
         
-        if( gestor == null){
+        if( gestor == null)
+        {
             gestor = new GestorTrabajos();
         }
         return gestor;
