@@ -1,5 +1,5 @@
 hardware
-Redes
+REDES
 Seguridad
 Software
 TELECOMUNICACIones
